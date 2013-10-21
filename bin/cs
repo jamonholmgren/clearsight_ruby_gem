@@ -13,7 +13,7 @@ class App
   # them below in the show_help method.
   main do |command, *args|
     case command.to_s.to_sym
-    when :deploy then puts "Deploying to #{args.first}..."
+    when :deploy then Clearsight::Deploy.deploy(args)
     when :update then update
     when :help then show_help
     else
