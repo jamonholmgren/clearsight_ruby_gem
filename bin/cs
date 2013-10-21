@@ -9,14 +9,13 @@ class App
   include Methadone::CLILogging
   include Methadone::SH
 
+  # Create command line options here. Don't forget to document
+  # them below in the show_help method.
   main do |command, *args|
     case command.to_s.to_sym
-    when :deploy
-      puts "Deploying to #{args.first}..."
-    when :"" # No command
-      show_help
-    when :help
-      show_help
+    when :deploy then puts "Deploying to #{args.first}..."
+    when :update then update
+    when :help then show_help
     else
       puts "Invalid command."
       show_help
@@ -27,6 +26,14 @@ class App
     puts "USAGE:"
     puts "  deploy <setup>"
     puts "    Deploys or sets up deployment to a remote server. Replaces gitdeploysetup."
+    puts "  update"
+    puts "    Updates the gem. Same as `gem update clearsight`."
+  end
+
+  def self.update
+    print "Updating..."
+    sh "gem update clearsight"
+    puts "done."
   end
 
   arg :args, :optional
