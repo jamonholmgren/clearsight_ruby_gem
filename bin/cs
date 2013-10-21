@@ -16,6 +16,7 @@ class App
     when :deploy then CS::Deploy.deploy(args)
     when :update then update
     when :help then show_help
+    when :killrails then killrails(args.first || 3000)
     else
       puts "Invalid command."
       show_help
@@ -26,6 +27,8 @@ class App
     puts "USAGE:"
     puts "  deploy <setup>"
     puts "    Deploys or sets up deployment to a remote server. Replaces gitdeploysetup."
+    puts "  killrails <port>"
+    puts "    Kills a rails server running on the given port. Only works on Linux (so far)."
     puts "  update"
     puts "    Updates the gem. Same as `gem update clearsight`."
   end
@@ -36,6 +39,14 @@ class App
       sh "gem update clearsight"
     end
     puts "done."
+  end
+  
+  def self.kill_rails(port)
+    print "Killing Rails."
+    start_progress do
+      sh "fuser -n tcp -k #{port}"
+    end
+    puts "dead."
   end
 
   def self.start_progress
