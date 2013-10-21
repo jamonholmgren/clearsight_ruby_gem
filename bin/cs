@@ -53,11 +53,9 @@ class App
   end
   
   def self.sshify(host, keyname)
-    print "Installing SSH key to remote server."
-    start_progress do
-      sh "cat ~/.ssh/#{keyname}.pub | ssh #{host} 'cat >> ~/.ssh/authorized_keys'"
-    end
-    puts "installed."
+    puts "Installing SSH key to remote server."
+    sh "cat ~/.ssh/#{keyname}.pub | ssh #{host} 'cat >> ~/.ssh/authorized_keys'"
+    puts "Installed."
   end
 
   def self.start_progress
