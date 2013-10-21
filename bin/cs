@@ -8,6 +8,7 @@ class App
   include Methadone::Main
   include Methadone::CLILogging
   include Methadone::SH
+  require 'highline/import'
 
   # Create command line options here. Don't forget to document
   # them below in the show_help method.
