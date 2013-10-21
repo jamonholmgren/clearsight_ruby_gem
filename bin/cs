@@ -41,7 +41,7 @@ class App
     puts "done."
   end
   
-  def self.kill_rails(port)
+  def self.killrails(port)
     print "Killing Rails."
     start_progress do
       sh "fuser -n tcp -k #{port}"
