@@ -17,6 +17,7 @@ class App
     when :update then update
     when :help then show_help
     when :killrails then killrails(args.first || 3000)
+    when :sshify then sshify(args.last || "id_rsa")
     else
       puts "Invalid command."
       show_help
@@ -29,6 +30,8 @@ class App
     puts "    Deploys or sets up deployment to a remote server. Replaces gitdeploysetup."
     puts "  killrails <port>"
     puts "    Kills a rails server running on the given port. Only works on Linux (so far)."
+    puts "  sshify <host> <keyname>"
+    puts "    Installs your SSH public key (id_rsa.pub unless you pass a different one) to a remote server (host)."
     puts "  update"
     puts "    Updates the gem. Same as `gem update clearsight`."
   end
@@ -47,6 +50,14 @@ class App
       sh "fuser -n tcp -k #{port}"
     end
     puts "dead."
+  end
+  
+  def self.sshify(host, keyname)
+    print "Installing SSH key to remote server."
+    start_progress do
+      sh "cat ~/.ssh/#{keyname}.pub | ssh #{host} 'cat >> ~/.ssh/authorized_keys'"
+    end
+    puts "installed."
   end
 
   def self.start_progress
