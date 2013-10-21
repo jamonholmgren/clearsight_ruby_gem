@@ -8,7 +8,6 @@ class App
   include Methadone::Main
   include Methadone::CLILogging
   include Methadone::SH
-  require 'highline/import'
 
   # Create command line options here. Don't forget to document
   # them below in the show_help method.
@@ -18,11 +17,14 @@ class App
     when :update then update
     when :help then show_help
     when :killrails then killrails(args.first || 3000)
+    when :sshify then sshify(args.first, options[:key] || "id_rsa.pub")
     else
       puts "Invalid command."
       show_help
     end
   end
+  on("--key VALUE")
+  on("-k VALUE", "--key")
 
   def self.show_help
     puts "USAGE:"
@@ -30,6 +32,8 @@ class App
     puts "    Deploys or sets up deployment to a remote server. Replaces gitdeploysetup."
     puts "  killrails <port>"
     puts "    Kills a rails server running on the given port. Only works on Linux (so far)."
+    puts "  sshify host <-k keyname.pub>"
+    puts "    Installs your SSH public key (id_rsa.pub unless you pass a different one) to a remote server (user@host.com)."
     puts "  update"
     puts "    Updates the gem. Same as `gem update clearsight`."
   end
@@ -48,6 +52,12 @@ class App
       sh "fuser -n tcp -k #{port}"
     end
     puts "dead."
+  end
+  
+  def self.sshify(host, keyname)
+    puts "Installing SSH key to remote server."
+    sh "cat ~/.ssh/#{keyname} | ssh #{host} 'cat >> ~/.ssh/authorized_keys'"
+    puts "Installed."
   end
 
   def self.start_progress
