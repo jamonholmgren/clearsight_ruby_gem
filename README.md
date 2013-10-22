@@ -1,12 +1,12 @@
-# Clearsight
+# ClearSight
 
-TODO: Write a gem description
+ClearSight Studio's swiss army knife. Intended to replace winscripts.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'clearsight'
+    gem "clearsight"
 
 And then execute:
 
