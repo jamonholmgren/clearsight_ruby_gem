@@ -1,6 +1,6 @@
 # ClearSight
 
-ClearSight Studio's swiss army knife. Intended to replace winscripts.
+ClearSight Studio's swiss army knife. Common utilities for ClearSight Studio, a web and mobile app development studio in Portland, OR/Vancouver, WA.
 
 ## Installation
 
