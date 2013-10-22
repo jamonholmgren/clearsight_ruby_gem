@@ -6,7 +6,7 @@ ClearSight Studio's swiss army knife. Intended to replace winscripts.
 
 Add this line to your application's Gemfile:
 
-    gem "clearsight"
+    gem "clearsight", "~> 0.0.9"
 
 And then execute:
 
