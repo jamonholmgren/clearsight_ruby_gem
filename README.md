@@ -1,12 +1,12 @@
-# Clearsight
+# ClearSight
 
-TODO: Write a gem description
+ClearSight Studio's swiss army knife. Common utilities for ClearSight Studio, a web and mobile app development studio in Portland, OR/Vancouver, WA.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'clearsight'
+    gem "clearsight", "~> 0.0.9"
 
 And then execute:
 
