@@ -13,11 +13,12 @@ class App
   # them below in the show_help method.
   main do |command, *args|
     case command.to_s.to_sym
-    when :deploy then CS::Deploy.deploy(args)
-    when :update then update
-    when :help then show_help
-    when :killrails then killrails(args.first || 3000)
-    when :sshify then sshify(args.first, options[:key] || "id_rsa.pub")
+      when :deploy then CS::Deploy.deploy(args)
+      when :update then update
+      when :help then show_help
+      when :killrails then killrails(args.first || 3000)
+      when :sshify then sshify(args.first, options[:key] || "id_rsa.pub")
+      when :compose then compose(args)
     else
       puts "Invalid command."
       show_help
@@ -66,6 +67,10 @@ class App
     @t.stop
   end
 
+  def self.compose(appname)
+    sh "rails new #{appname} -m https://raw.github.com/RailsApps/rails-composer/master/composer.rb"
+  end  
+  
   arg :args, :optional
   
   version Clearsight::VERSION
