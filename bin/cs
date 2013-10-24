@@ -18,7 +18,7 @@ class App
       when :help then show_help
       when :killrails then killrails(args.first || 3000)
       when :sshify then sshify(args.first, options[:key] || "id_rsa.pub")
-      when :compose then compose(args)
+      when :compose then compose(args.first)
     else
       puts "Invalid command."
       show_help
