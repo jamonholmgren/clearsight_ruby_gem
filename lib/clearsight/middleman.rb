@@ -33,7 +33,7 @@ module Clearsight
 
     def update
       print "Updating ClearSight middleman template..."
-      sh "cd ~/.middleman/clearsight && git pull"
+      sh "cd ~/.middleman/clearsight && git pull && cd -"
       puts "done."
     end
 
