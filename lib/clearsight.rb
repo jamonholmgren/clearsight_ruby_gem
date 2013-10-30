@@ -1,5 +1,6 @@
 require "clearsight/version"
 require "clearsight/deploy"
+require "clearsight/middleman"
 require 'thread'
 
 module Clearsight
