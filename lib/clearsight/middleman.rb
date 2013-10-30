@@ -1,5 +1,6 @@
 module Clearsight
   class Middleman
+    include Methadone::CLILogging
     include Methadone::SH
 
     attr_accessor :args
@@ -26,7 +27,7 @@ module Clearsight
 
     def clone
       print "Cloning ClearSight middleman template..."
-      sh "git clone git@bitbucket.org/clearsightstudio/middleman-template.git ~/.middleman/clearsight"
+      sh "git clone git@bitbucket.org:clearsightstudio/middleman-template.git ~/.middleman/clearsight"
       puts "done."
     end
 
