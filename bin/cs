@@ -18,6 +18,7 @@ class App
     when :help then show_help
     when :killrails then killrails(args.first || 3000)
     when :sshify then sshify(args.first, options[:key] || "id_rsa.pub")
+    when :mm then CS::Middleman.new(args).run
     else
       puts "Invalid command."
       show_help
@@ -34,6 +35,8 @@ class App
     puts "    Kills a rails server running on the given port. Only works on Linux (so far)."
     puts "  sshify host <-k keyname.pub>"
     puts "    Installs your SSH public key (id_rsa.pub unless you pass a different one) to a remote server (user@host.com)."
+    puts "  mm <project>"
+    puts "    Initializes a middleman project with the given project name using the ClearSight template."
     puts "  update"
     puts "    Updates the gem. Same as `gem update clearsight`."
   end
@@ -45,7 +48,7 @@ class App
     end
     puts "done."
   end
-  
+
   def self.killrails(port)
     print "Killing Rails."
     start_progress do
@@ -53,7 +56,7 @@ class App
     end
     puts "dead."
   end
-  
+
   def self.sshify(host, keyname)
     puts "Installing SSH key to remote server."
     sh "cat ~/.ssh/#{keyname} | ssh #{host} 'cat >> ~/.ssh/authorized_keys'"
@@ -65,9 +68,9 @@ class App
     yield
     @t.stop
   end
-  
+
   arg :args, :optional
-  
+
   version Clearsight::VERSION
 
   use_log_level_option
