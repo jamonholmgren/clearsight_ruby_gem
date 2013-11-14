@@ -1,6 +1,7 @@
 require "clearsight/version"
 require "clearsight/deploy"
 require "clearsight/middleman"
+require "clearsight/xcode"
 require 'thread'
 
 module Clearsight

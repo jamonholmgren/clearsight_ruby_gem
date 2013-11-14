@@ -19,6 +19,7 @@ class App
     when :killrails then killrails(args.first || 3000)
     when :sshify then sshify(args.first, options[:key] || "id_rsa.pub")
     when :mm then CS::Middleman.new(args).run
+    when :symlink_xcode_sdks then CS::Xcode.new(args).run
     else
       puts "Invalid command."
       show_help
