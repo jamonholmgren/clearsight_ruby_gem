@@ -60,7 +60,7 @@ class App
 
   def self.sshify(host, keyname)
     puts "Installing SSH key to remote server."
-    sh "cat ~/.ssh/#{keyname} | ssh #{host} 'cat >> ~/.ssh/authorized_keys'"
+    Clearsight::SSH.new(host).sshify(keyname)
     puts "Installed."
   end
 
