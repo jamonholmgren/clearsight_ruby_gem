@@ -1,5 +1,6 @@
 module Clearsight
   class Deploy
+    include Methadone::CLILogging
     include Methadone::SH
 
     def self.deploy(args)
