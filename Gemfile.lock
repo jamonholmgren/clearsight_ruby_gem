@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    clearsight (1.0.0)
+    clearsight (1.2.0.rc3)
       highline (~> 1.6.20)
       methadone (~> 1.3.0)
 
